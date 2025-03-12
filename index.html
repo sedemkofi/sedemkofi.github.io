@@ -10,9 +10,33 @@
             margin: 0;
             padding: 0;
             text-align: center;
+            overflow: hidden; /* Prevent scrolling */
+        }
+        .video-bg {
+            position: fixed;
+            top: 5%;
+            left: 0;
+            width: 100%;
+            height: 95%;
+            object-fit: cover;
+            z-index: -1; /* Ensure the video is behind other content */
         }
         .container {
-            padding: 50px;
+            position: relative; /* Ensure content is above the video */
+            z-index: 1;
+            color: white;
+            padding: 100px;
+        }
+        .profile-img-container, .about-content, .question-box, .answers-box {
+            opacity: 0; /* Start invisible */
+            visibility: hidden; /* Hide but keep in layout */
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out; /* Smooth transitions */
+            transform: translateY(20px); /* Start slightly below final position */
+        }
+        .profile-img-container.show, .about-content.show, .question-box.show, .answers-box.show {
+            opacity: 1; /* Fade in */
+            visibility: visible; /* Make visible */
+            transform: translateY(0); /* Move to final position */
         }
         .profile-img {
             width: 150px;
@@ -27,15 +51,40 @@
     </style>
 </head>
 <body>
+    <video autoplay muted class="video-bg" id="background-video">
+        <source src="WWTBAM.mp4" type="video/mp4">
+    </video>
     <div class="container">
-        <img src="profile.jpg" class="profile-img" alt="Profile Picture">
-        <h1>Sedem Amediku</h1>
-        <p>Software Developer | AI Enthusiast | Web Developer</p>
-        <div class="links">
+        <div class="profile-img-container" id="profile-img-container">
+            <img src="profile.png" class="profile-img" alt="Profile Picture">
+        </div>
+        <div class="about-content" id="about-content-container">
+            <h1>Sedem Amediku</h1>
+            <p>Software Developer | AI Enthusiast | Web Developer</p>
+        </div>
+        <div class="question-box" id="question-box">
+
+        </div>
+        <div class="answers-box" id="answers-box">
+
+        </div>
+        
+        <!-- <div class="links">
             <a href="https://github.com/sedemkofi">GitHub</a>
             <a href="https://linkedin.com/in/sedem-amediku">LinkedIn</a>
             <a href="projects.html">Projects</a>
-        </div>
+        </div> -->
+        
     </div>
+    <script>
+        document.getElementById('background-video').addEventListener('timeupdate', function() {
+            if (this.currentTime >= 5.5) {
+                document.getElementById('profile-img-container').classList.add('show');
+            }
+            if (this.currentTime >= 6) {
+                document.getElementById('about-content-container').classList.add('show');
+            }
+        });
+    </script>
 </body>
 </html>
