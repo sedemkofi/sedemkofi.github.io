@@ -1,157 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <title>My Portfolio</title>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-        .main-container {
-            position: relative;
-            height: 100vh; /* Fixed height to viewport */
-            overflow: hidden; /* Contain the video */
-        }
-        .video-bg {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0; /* Base layer */
-        }
-        .video-bg.blur {
-            filter: blur(5px);
-            transition: filter 1.5s ease-in-out;
-        }
-        .container {
-            position: relative;
-            z-index: 1;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%; /* Fill the main container */
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .profile-img-container, .about-content, .question-box, .answers-box {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
-            transform: translateY(20px);
-        }
-        .profile-img-container.show, .about-content.show, .question-box.show, .answers-box.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        .profile-img {
-            width: 150px;
-            border-radius: 50%;
-        }
-        .links a {
-            display: block;
-            margin: 10px;
-            text-decoration: none;
-            color: blue;
-        }
-        .footer {
-            background-color: white;
-            color: #333;
-            padding: 2px 0;
-            width: 100%;
-        }
-        .footer-note {
-            font-size: 8px;
-            margin: 0;
-            padding: 15px;
-        }
-        .name {
-            font-size: 50px;
-            font-weight: 700;
-            margin: 0;
-        }
-        .roles{
-            font-size: 12px;
-        }
-        
-        .start-button {
-            background: none;
-            border: none;
-            padding: 0;
-            cursor: pointer;
-            transition: transform 0.1s ease;
-        }
-        .start-button:hover {
-            transform: scale(1.1); /* Enlarge button by 10% on hover */
-        }
-        .start-button img {
-            width: 130px;
-            height: 80px;
-            /* transition: filter 0.1s ease; */
-        }
-        .start-button:hover img {
-            filter: hue-rotate(180deg) saturate(2); /* Change blue to yellow and white to blue */
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <title>My Portfolio</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    .main-container {
+      position: relative;
+      height: 100vh; /* Fixed height to viewport */
+      overflow: hidden; /* Contain the video */
+    }
+    .video-bg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0; /* Base layer */
+    }
+    .video-bg.blur {
+      filter: blur(5px);
+      transition: filter 1.5s ease-in-out;
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%; /* Fill the main container */
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .profile-img-container,
+    .about-content,
+    .question-box,
+    .answers-box {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+      transform: translateY(20px);
+    }
+    .profile-img-container.show,
+    .about-content.show,
+    .question-box.show,
+    .answers-box.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .profile-img {
+      width: 150px;
+      border-radius: 50%;
+    }
+    .links a {
+      display: block;
+      margin: 10px;
+      text-decoration: none;
+      color: blue;
+    }
+    .footer {
+      background-color: white;
+      color: #333;
+      padding: 2px 0;
+      width: 100%;
+    }
+    .footer-note {
+      font-size: 8px;
+      margin: 0;
+      padding: 15px;
+    }
+    .name {
+      font-size: 50px;
+      font-weight: 700;
+      margin: 0;
+    }
+    .roles {
+      font-size: 12px;
+    }
+    .start-button {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+    .start-button:hover {
+      transform: scale(1.1); /* Enlarge button by 10% on hover */
+    }
+    .start-button img {
+      width: 130px;
+      height: 80px;
+    }
+    .start-button:hover img {
+      filter: hue-rotate(180deg) saturate(2); /* Change blue to yellow and white to blue */
+    }
+
+    /* Zoom animation */
+    @keyframes zoomIn {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.3);
+      }
+    }
+    .zoom {
+      animation: zoomIn 1s forwards;
+    }
+  </style>
 </head>
 <body>
-    <div class="main-container">
-        <video autoplay muted class="video-bg" id="background-video">
-            <source src="WWTBAM.mp4" type="video/mp4">
-        </video>
-        <div class="container">
-            <div class="profile-img-container" id="profile-img-container">
-                <img src="profile.png" class="profile-img" alt="Profile Picture">
-            </div>
-            <div class="about-content" id="about-content-container">
-                <p class="name" id="name">Sedem Amediku</p>
-                <p class="roles" id="roles">AI Intermediate | Software Engineer  | Web Developer</p>
-            </div>
-            <div>
-                <button onclick="startGame()" class="start-button"> 
-                    <img src="start.gif" alt="Start Game">                    
-                </button>
-            </div>
-            <div class="game-box" id="game-box">
-                <div class="question-box" id="question-box">
-    
-                </div>
-                <div class="answers-box" id="answers-box">
-        
-                </div>
-            </div>
-            
-        </div>
+  <div class="main-container" id="main-container">
+    <video autoplay muted class="video-bg" id="background-video">
+      <source src="WWTBAM.mp4" type="video/mp4" />
+    </video>
+    <div class="container">
+      <div class="profile-img-container" id="profile-img-container">
+        <img src="profile.png" class="profile-img" alt="Profile Picture" />
+      </div>
+      <div class="about-content" id="about-content-container">
+        <p class="name" id="name">Sedem Amediku</p>
+        <p class="roles" id="roles">
+          AI Intermediate | Software Engineer | Web Developer
+        </p>
+      </div>
+      <div>
+        <button onclick="startGame()" class="start-button">
+          <img src="play.gif" alt="Sedem's Game" />
+        </button>
+      </div>
+      <div class="game-box" id="game-box">
+        <div class="question-box" id="question-box"></div>
+        <div class="answers-box" id="answers-box"></div>
+      </div>
     </div>
-    <div class="footer">
-        <p class="footer-note">© 2025 Sedem Amediku | BSc Computer Science | Ashesi University</p>
-    </div>
-    
-    <script>
-        function startGame() {
-            // window.location.href = "https://sedemkofi.github.io/my-portfolio";
-            window.location.href = "http://localhost:3000/my-portfolio";
-        }
-        document.getElementById('background-video').addEventListener('timeupdate', function() {
-            if (this.currentTime >= 5.5) {
-                document.getElementById('profile-img-container').classList.add('show');
-            }
-            if (this.currentTime >= 6) {
-                document.getElementById('about-content-container').classList.add('show');
-                this.classList.add('blur'); // Add blur class to video
-            }
-        });
-    </script>
+  </div>
+  <div class="footer">
+    <p class="footer-note">
+      © 2025 Sedem Amediku | BSc Computer Science | Ashesi University
+    </p>
+  </div>
+
+  <script>
+    function startGame() {
+      const mainContainer = document.getElementById('main-container');
+      // Add the zoom animation class
+      mainContainer.classList.add('zoom');
+      // Wait for the animation to finish before redirecting
+      mainContainer.addEventListener('animationend', function () {
+        // Change the URL after the zoom animation
+        window.location.href = "http://localhost:3000/my-portfolio";
+      });
+    }
+    document.getElementById('background-video').addEventListener('timeupdate', function () {
+      if (this.currentTime >= 5.5) {
+        document.getElementById('profile-img-container').classList.add('show');
+      }
+      if (this.currentTime >= 6) {
+        document.getElementById('about-content-container').classList.add('show');
+        this.classList.add('blur'); // Add blur class to video
+      }
+    });
+  </script>
 </body>
 </html>
