@@ -3,48 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <title>My Portfolio</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             text-align: center;
-            overflow-x: hidden; /* Allow vertical scrolling but prevent horizontal */
+            overflow-x: hidden;
             overflow-y: auto;
         }
+        .main-container {
+            position: relative;
+            height: 100vh; /* Fixed height to viewport */
+            overflow: hidden; /* Contain the video */
+        }
         .video-bg {
-            position: fixed;
+            position: absolute;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: -1; /* Ensure the video is behind other content */
+            z-index: 0; /* Base layer */
         }
         .video-bg.blur {
-            filter: blur(5px); /* Apply blur effect */
-            transition: filter 1.5s ease-in-out; /* Smooth transition for blur */
+            filter: blur(5px);
+            transition: filter 1.5s ease-in-out;
         }
         .container {
-            position: relative; /* Ensure content is above the video */
+            position: relative;
             z-index: 1;
             color: white;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Ensure it takes at least full viewport height */
+            height: 100%; /* Fill the main container */
+            padding: 20px;
+            box-sizing: border-box;
         }
         .profile-img-container, .about-content, .question-box, .answers-box {
-            opacity: 0; /* Start invisible */
-            visibility: hidden; /* Hide but keep in layout */
-            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out; /* Smooth transitions */
-            transform: translateY(20px); /* Start slightly below final position */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+            transform: translateY(20px);
         }
         .profile-img-container.show, .about-content.show, .question-box.show, .answers-box.show {
-            opacity: 1; /* Fade in */
-            visibility: visible; /* Make visible */
-            transform: translateY(0); /* Move to final position */
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
         .profile-img {
             width: 150px;
@@ -59,14 +68,40 @@
         .footer {
             background-color: white;
             color: #333;
-            padding: 20px 0;
+            padding: 2px 0;
             width: 100%;
-            position: relative;
-            z-index: 2; /* Ensure it's above the video */
         }
         .footer-note {
+            font-size: 8px;
             margin: 0;
             padding: 15px;
+        }
+        .name {
+            font-size: 50px;
+            font-weight: 700;
+            margin: 0;
+        }
+        .roles{
+            font-size: 12px;
+        }
+        
+        .start-button {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+        .start-button:hover {
+            transform: scale(1.1); /* Enlarge button by 10% on hover */
+        }
+        .start-button img {
+            width: 130px;
+            height: 80px;
+            /* transition: filter 0.1s ease; */
+        }
+        .start-button:hover img {
+            filter: hue-rotate(180deg) saturate(2); /* Change blue to yellow and white to blue */
         }
     </style>
 </head>
@@ -80,12 +115,12 @@
                 <img src="profile.png" class="profile-img" alt="Profile Picture">
             </div>
             <div class="about-content" id="about-content-container">
-                <h1>Sedem Amediku</h1>
-                <p>Software Developer | AI Enthusiast | Web Developer</p>
+                <p class="name" id="name">Sedem Amediku</p>
+                <p class="roles" id="roles">AI Intermediate | Software Engineer  | Web Developer</p>
             </div>
             <div>
-                <button onclick="startGame()" style="background: none; border: none; padding: 0;"> 
-                    <video src="start-box.gif" alt="Start Game" style="width: 130px; height: 30px;">
+                <button onclick="startGame()" class="start-button"> 
+                    <img src="start.gif" alt="Start Game">                    
                 </button>
             </div>
             <div class="game-box" id="game-box">
@@ -97,17 +132,10 @@
                 </div>
             </div>
             
-            
-            <!-- <div class="links">
-                <a href="https://github.com/sedemkofi">GitHub</a>
-                <a href="https://linkedin.com/in/sedem-amediku">LinkedIn</a>
-                <a href="projects.html">Projects</a>
-            </div> -->
-            
         </div>
     </div>
     <div class="footer">
-        <p class="footer-note">© 2025 Sedem Amediku | BSc Computer Science</p>
+        <p class="footer-note">© 2025 Sedem Amediku | BSc Computer Science | Ashesi University</p>
     </div>
     
     <script>
