@@ -1,3 +1,4 @@
+github.io\index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +51,8 @@
     .profile-img-container,
     .about-content,
     .question-box,
-    .answers-box {
+    .answers-box,
+    .start-button-container {
       opacity: 0;
       visibility: hidden;
       transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
@@ -59,7 +61,8 @@
     .profile-img-container.show,
     .about-content.show,
     .question-box.show,
-    .answers-box.show {
+    .answers-box.show,
+    .start-button-container.show {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
@@ -104,8 +107,8 @@
       transform: scale(1.1); /* Enlarge button by 10% on hover */
     }
     .start-button img {
-      width: 130px;
-      height: 80px;
+      width: 160px;
+      height: 130px;
     }
     .start-button:hover img {
       filter: hue-rotate(180deg) saturate(2); /* Change blue to yellow and white to blue */
@@ -141,7 +144,7 @@
           AI Intermediate | Software Engineer | Web Developer
         </p>
       </div>
-      <div>
+      <div class="start-button-container" id="start-button-container">
         <button onclick="startGame()" class="start-button">
           <img src="play.gif" alt="Sedem's Game" />
         </button>
@@ -166,7 +169,7 @@
       // Wait for the animation to finish before redirecting
       mainContainer.addEventListener('animationend', function () {
         // Change the URL after the zoom animation
-        window.location.href = "http://localhost:3000/my-portfolio";
+        window.location.href = "http://sedemkofi.github.io/my-portfolio";
       });
     }
     document.getElementById('background-video').addEventListener('timeupdate', function () {
@@ -175,6 +178,7 @@
       }
       if (this.currentTime >= 6) {
         document.getElementById('about-content-container').classList.add('show');
+        document.getElementById('start-button-container').classList.add('show');
         this.classList.add('blur'); // Add blur class to video
       }
     });
