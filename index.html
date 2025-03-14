@@ -19,8 +19,8 @@
     }
     .main-container {
       position: relative;
-      height: 100vh; /* Fixed height to viewport */
-      overflow: hidden; /* Contain the video */
+      height: 100vh;
+      overflow: hidden;
     }
     .video-bg {
       position: absolute;
@@ -29,7 +29,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: 0; /* Base layer */
+      z-index: 0;
     }
     .video-bg.blur {
       filter: blur(5px);
@@ -43,7 +43,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100%; /* Fill the main container */
+      height: 100%;
       padding: 20px;
       box-sizing: border-box;
     }
@@ -51,7 +51,8 @@
     .about-content,
     .question-box,
     .answers-box,
-    .start-button-container {
+    .start-button-container,
+    .portfolio-button-container {
       opacity: 0;
       visibility: hidden;
       transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
@@ -61,7 +62,8 @@
     .about-content.show,
     .question-box.show,
     .answers-box.show,
-    .start-button-container.show {
+    .start-button-container.show,
+    .portfolio-button-container.show {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
@@ -69,12 +71,6 @@
     .profile-img {
       width: 150px;
       border-radius: 50%;
-    }
-    .links a {
-      display: block;
-      margin: 10px;
-      text-decoration: none;
-      color: blue;
     }
     .footer {
       background-color: white;
@@ -103,16 +99,34 @@
       transition: transform 0.1s ease;
     }
     .start-button:hover {
-      transform: scale(1.1); /* Enlarge button by 10% on hover */
+      transform: scale(1.1);
     }
     .start-button img {
       width: 160px;
       height: 130px;
     }
     .start-button:hover img {
-      filter: hue-rotate(180deg) saturate(2); /* Change blue to yellow and white to blue */
+      filter: hue-rotate(180deg) saturate(2);
     }
-
+    /* New portfolio button styling */
+    .portfolio-button {
+      background-color: rgba(0, 93, 192, 0.8); /* Semi-transparent blue */
+      color: white;
+      font-size: 18px;
+      padding: 12px 24px;
+      border: 2px solid rgba(0, 123, 255, 0.8);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .portfolio-button:hover {
+      background-color: rgb(0, 41, 86); /* Solid blue on hover */
+      border: #333;
+      transform: scale(1.05);
+    }
+    .portfolio-button-container {
+      margin-top: 20px;
+    }
     /* Zoom animation */
     @keyframes zoomIn {
       from {
@@ -129,13 +143,12 @@
 </head>
 <body>
   <div class="main-container" id="main-container">
-    <!-- Added playsinline and webkit-playsinline attributes for mobile inline playback -->
     <video autoplay muted playsinline webkit-playsinline class="video-bg" id="background-video">
-      <source src="WWTBAM.mp4" type="video/mp4" />
+      <source src="/assets/WWTBAM.mp4" type="video/mp4" />
     </video>
     <div class="container">
       <div class="profile-img-container" id="profile-img-container">
-        <img src="profile.png" class="profile-img" alt="Profile Picture" />
+        <img src="/assets/profile.png" class="profile-img" alt="Profile Picture" />
       </div>
       <div class="about-content" id="about-content-container">
         <p class="name" id="name">Sedem Amediku</p>
@@ -145,8 +158,14 @@
       </div>
       <div class="start-button-container" id="start-button-container">
         <button onclick="startGame()" class="start-button">
-          <img src="play.gif" alt="Sedem's Game" />
+          <img src="/assets/play.gif" alt="Sedem's Game" />
         </button>
+      </div>
+      <!-- New View My Portfolio Button -->
+      <div class="portfolio-button-container" id="portfolio-button-container">
+        <a href="https://sedemkofi.github.io/pages/portfolio">
+          <button class="portfolio-button">View My Portfolio</button>
+        </a>
       </div>
       <div class="game-box" id="game-box">
         <div class="question-box" id="question-box"></div>
@@ -167,8 +186,7 @@
       mainContainer.classList.add('zoom');
       // Wait for the animation to finish before redirecting
       mainContainer.addEventListener('animationend', function () {
-        // Change the URL after the zoom animation
-        window.location.href = "http://sedemkofi.github.io/my-portfolio";
+        window.location.href = "https://sedemkofi.github.io/pages/portfolio.html";
       });
     }
 
@@ -187,7 +205,10 @@
       if (this.currentTime >= 6) {
         document.getElementById('about-content-container').classList.add('show');
         document.getElementById('start-button-container').classList.add('show');
-        this.classList.add('blur'); // Add blur class to video
+        this.classList.add('blur');
+      }
+      if (this.currentTime >= 0) {
+        document.getElementById('portfolio-button-container').classList.add('show');
       }
     });
   </script>
